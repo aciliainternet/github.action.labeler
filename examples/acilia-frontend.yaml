@@ -1,0 +1,29 @@
+name: Labeler
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * 1'
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: 'Apply labels'
+        uses: aciliainternet/github.action.labeler@0.9.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            [
+              { "name": "WIP", "color": "f504f9", "description": "PR is a Work in Progress, do not validate" },
+              { "name": "Release", "color": "0075ca", "description": "PR has code to be released" },
+              { "name": "Ready for Review", "color": "71F376", "description": "PR is ready to be peer reviewed" },
+              { "name": "Validated", "color": "88D2B2", "description": "PR has the needed approvals for its merge" },
+              { "name": "Has feedback", "color": "E5DCBB", "description": "PR has comments that needs to be addressed by the owner" },
+              { "name": "Ready for release", "color": "008672", "description": "PR has the OK from the QA team for releasing" },
+              { "name": "Don't merge", "color": "F00E29", "description": "PR is not ready for merge" },
+              { "name": "Has dependencies", "color": "D0B8EA", "description": "PR has dependencies with other development" },
+              { "name": "New packages", "color": "852399", "description": "PR has changes in the packages" },
+              { "name": "Infrastructure", "color": "b51873", "description": "PR needs infrastructure changes" }
+            ]
