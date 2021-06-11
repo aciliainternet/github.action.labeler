@@ -1,13 +1,6 @@
-# GitHub Action - Labeler
-Makes sure the repository has a predefined set of labels
-
-Define your action as this:
-```yaml
 name: labeler
 
-on:
-  schedule:
-    - cron:  '0 0 * * 1'
+on: [push, pull_request]
 
 jobs:
   labeler:
@@ -15,7 +8,7 @@ jobs:
     steps:
       -
         name: 'Apply labels'
-        uses: aciliainternet/github.action.labeler@v1.0
+        uses: andres-montanez/labeler-test@v2.18
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: |
@@ -25,6 +18,3 @@ jobs:
               { "name": "READY FOR REVIEW", "color": "000000", "description": "The PR is ready for Peer Review" },
               { "name": "documentation", "color": "0075ca", "description": "Improve documentation" }
             ]
-```
-
-The action will be executed once a week on mondays.
