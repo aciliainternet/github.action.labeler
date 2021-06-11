@@ -1,13 +1,15 @@
 # GitHub Action - Labeler
 Makes sure the repository has a predefined set of labels
 
-Define your action as this:
+Define your action as this `.github/workflows/labeler.yml`:
 ```yaml
 name: labeler
 
 on:
+  workflow_dispatch:
   schedule:
     - cron:  '0 0 * * 1'
+
 
 jobs:
   labeler:
@@ -15,7 +17,7 @@ jobs:
     steps:
       -
         name: 'Apply labels'
-        uses: aciliainternet/github.action.labeler@v1.0
+        uses: aciliainternet/github.action.labeler@0.9.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: |

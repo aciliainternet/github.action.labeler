@@ -1,6 +1,9 @@
 name: labeler
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * 1'
 
 jobs:
   labeler:
@@ -8,7 +11,7 @@ jobs:
     steps:
       -
         name: 'Apply labels'
-        uses: andres-montanez/labeler-test@v2.18
+        uses: aciliainternet/github.action.labeler@0.9.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: |
